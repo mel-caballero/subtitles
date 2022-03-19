@@ -3,77 +3,65 @@ var textCastella = [""];
 var textAngles = [""];
 
 function generador() {
-  var idioma = document.getElementById("idioma").value;
-  var subtitol;
+  let idioma = document.getElementById("idioma").value;
+
   switch(idioma) {
-    case "ca":
-      subtitol = textCatala[0];
-    break;
     case "es":
       subtitol = textCastella[0];
-    break;
+      break;
     case "en":
       subtitol = textAngles[0];
-    break;
+      break;
+    case "ca":
     default:
-      ser = "Ups ...";
+      subtitol = textCatala[0];
+      break;
   }
-  console.log(subtitol);
-  var text = breakString(subtitol, 30);
-  document.getElementById("subtitols").innerHTML = text;
+  //let text = breakString(subtitol, 30);
+  //document.getElementById("subtitols").innerHTML = text;
+  breakString(subtitol, 30);
 }
 
 function breakString (str, limit) {
-  var brokenString = '<div class="container"><p class="item">';
-  for(var i = 0, count = 0, numChar = 0; i < str.length; i++){
-      if (str[i] === ']'){
-        numChar = count;
-        count = 0;
-        brokenString += ']</p><p class="item">'+numChar+'</p></div><div class="container"><p class="item">';
-      }else if(str[i] === '.'){
-        numChar = count;
-        count = 0;
-        brokenString += '.</p><p class="item">'+numChar+'</p></div><div class="container"><p class="item">';
-      }else if(count >= limit && str[i] === ' '){
-        numChar = count;
-        count = 0;
-        brokenString += '</p><p class="item">'+numChar+'</p></div><div class="container"><p class="item">';
-      }else{
-        count++;
-        brokenString += str[i];
-      }
-  }
-  return brokenString;
+  let sentence = "";
+  let subt = [];
+  let end = 0;
+  str.forEach(element => {
+    while (index != limit) {
+      sentence =+ element;
+    }
+    subt.push(sentence);
+    sentence = "";
+    end + limit;
+  });
+  document.getElementById("subtitols").innerHTML = text;
 }
 
 function borrar() {
-  for(var i = 0; i < textCatala.length; i++){
+  for(let i = 0; i < textCatala.length; i++){
     textCatala.pop();
   }
-  for(var i = 0; i < textCastella.length; i++){
+  for(let i = 0; i < textCastella.length; i++){
     textCastella.pop();
   }
-  for(var i = 0; i < textAngles.length; i++){
+  for(let i = 0; i < textAngles.length; i++){
     textAngles.pop();
   }
-  console.log(textCatala);
-  console.log(textCastella);
-  console.log(textAngles);
+  document.getElementById("langCa").value = "";
+  document.getElementById("langES").value = "";
+  document.getElementById("langEn").value = "";
   document.getElementById("textArea").style.display = "block";
 }
 
 function guarda() {
-  var ca = document.getElementById("langCa").value;
-  var es = document.getElementById("langEs").value;
-  var en = document.getElementById("langEn").value;
+  let ca = document.getElementById("langCa").value;
+  let es = document.getElementById("langEs").value;
+  let en = document.getElementById("langEn").value;
 
-  textCatala[0] = ca;
-  textCastella[0] = es;
-  textAngles[0] = en;
+  textCatala.push(ca);
+  textCastella.push(es);
+  textAngles.push(en);
 
-  console.log(textCatala);
-  console.log(textCastella);
-  console.log(textAngles);
   document.getElementById("textArea").style.display = "none";
 }
 
